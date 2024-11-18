@@ -2,10 +2,26 @@ import express from "express";
 
 const app = express();
 
-const blog = { id: 1, title: "Blog title", description: "Blog description" }
+// middlewares
+app.use(express.static("public"));
+
+app.set("view engine", "ejs");
+
 
 app.get("/", (req, res) => {
-  res.send(blog);
+  res.render("index");
+});
+
+app.get("/about", (req, res) => {
+  res.render("about");
+});
+
+app.get("/add_post", (req, res) => {
+  res.render("add_post");
+});
+
+app.get("/post", (req, res) => {
+  res.render("post");
 });
 
 const port = 3000;
