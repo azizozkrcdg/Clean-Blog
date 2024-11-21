@@ -1,15 +1,22 @@
 import express from "express";
+import dotenv from "dotenv";
+import conn from "./config/db.js";
+import Post from "./models/Post.js"
 
+dotenv.config();
 const app = express();
+conn();
 
-// middlewares
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static("public"));
-
 app.set("view engine", "ejs");
 
+// routes
 
-app.get("/", (req, res) => {
-  res.render("index");
+app.get("/",async(req, res) => {
+  const posts = await Post.find();
+  res.render("index", {posts : posts});
 });
 
 app.get("/about", (req, res) => {
@@ -24,6 +31,12 @@ app.get("/post", (req, res) => {
   res.render("post");
 });
 
+app.post("/posts", async (req, res) => {
+  await Post.create(req.body);
+  res.status(301).redirect("/");
+});
+
+// listen port 
 const port = 3000;
 app.listen(port, () => {
   console.log(`The server is running on port ${port}`);
