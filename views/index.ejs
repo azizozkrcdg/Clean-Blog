@@ -10,7 +10,7 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
             <h1>Clean Blog</h1>
-            <span class="subheading">A Blog Theme by Start Bootstrap</span>
+            <span class="subheading">***</span>
           </div>
         </div>
       </div>
@@ -23,7 +23,7 @@
       <div class="col-lg-8 col-md-10 mx-auto">
         <% for (let i = 0; i < posts.length; i++) { %>
         <div class="post-preview">
-          <a href="post.html">
+          <a href="posts/<%= posts[i]._id %>">
             <h2 class="post-title">
               <%= posts[i].title %>
             </h2>
@@ -31,9 +31,8 @@
               <%= posts[i].post_text %>
             </h3>
           </a>
-          <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on September 24, 2019</p>
+          <p class="post-meta"> <%= posts[i].dateCreated %></p>
+          <p class="post-meta"> Created By <a href="https://www.linkedin.com/in/azizozkrcdg"><%= posts[i].creator %></a></p>
         </div>
        <% } %>
         <hr>
