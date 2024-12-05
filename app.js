@@ -1,43 +1,36 @@
 import express from "express";
 import dotenv from "dotenv";
 import conn from "./config/db.js";
-import Post from "./models/Post.js"
+import * as postControllers from "./controllers/postControllers.js";
+import * as pageControllers from "./controllers/pageControllers.js";
+import methodOverride from "method-override";
 
 dotenv.config();
 const app = express();
 conn();
 
+// MIDDLEWARES
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 app.set("view engine", "ejs");
+app.use(
+  methodOverride('_method', {
+    methods: ['POST', 'GET'],
+  })
+);
 
 // routes
-
-app.get("/",async(req, res) => {
-  const posts = await Post.find();
-  res.render("index", {posts : posts});
-});
-
-app.get("/posts/:id", async(req, res) => {
-  const post = await Post.findById(req.params.id);
-  res.render("post", {post})
-});
+app.get("/", postControllers.getAllPosts);
+app.get("/posts/:id", postControllers.getPost);
+app.put('/posts/:id', postControllers.updatePost);
+app.post("/posts", postControllers.createPost);
 
 
-app.get("/about", (req, res) => {
-  res.render("about");
-});
+app.get("/about", pageControllers.getAboutPage);
+app.get("/add_post", pageControllers.getAddPage);
+app.get("/posts/edit/:id", pageControllers.getEditPage);
 
-app.get("/add_post", (req, res) => {
-  res.render("add_post");
-});
-
-
-app.post("/posts", async (req, res) => {
-  await Post.create(req.body);
-  res.status(301).redirect("/");
-});
 
 // listen port 
 const port = 3000;
