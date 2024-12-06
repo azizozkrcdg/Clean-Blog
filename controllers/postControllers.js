@@ -16,7 +16,7 @@ const createPost = async (req, res) => {
 };
 
 const updatePost = async (req, res) => {
-    try {
+  try {
     const post = await Post.findById(req.params.id);
     post.title = req.body.title;
     post.post_text = req.body.post_text;
@@ -24,10 +24,14 @@ const updatePost = async (req, res) => {
     await post.save();
 
     res.redirect(`/posts/${req.params.id}`);
-  
-    } catch (error) {
-      console.log(error)
-    }
-  };
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-export { getAllPosts, getPost, createPost, updatePost};
+const deletePost = async (req, res) => {
+  const post = await Post.findByIdAndDelete(req.params.id);
+  res.redirect("/");
+};
+
+export { getAllPosts, getPost, createPost, updatePost, deletePost};

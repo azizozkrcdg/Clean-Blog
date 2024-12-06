@@ -23,9 +23,9 @@ app.use(
 // routes
 app.get("/", postControllers.getAllPosts);
 app.get("/posts/:id", postControllers.getPost);
-app.put('/posts/:id', postControllers.updatePost);
 app.post("/posts", postControllers.createPost);
-
+app.put('/posts/:id', postControllers.updatePost);
+app.delete("/posts/:id", postControllers.deletePost);
 
 app.get("/about", pageControllers.getAboutPage);
 app.get("/add_post", pageControllers.getAddPage);
