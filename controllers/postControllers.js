@@ -25,13 +25,18 @@ const updatePost = async (req, res) => {
 
     res.redirect(`/posts/${req.params.id}`);
   } catch (error) {
-    console.log(error);
+    console.log("Post güncellenemedi!!!", error);
   }
 };
 
 const deletePost = async (req, res) => {
-  const post = await Post.findByIdAndDelete(req.params.id);
-  res.redirect("/");
+  try {
+    const post = await Post.findByIdAndDelete(req.params.id);
+    res.redirect("/");
+  } catch (error) {
+    console.log("Post silinemedi!!!", error)
+  }
+  
 };
 
 export { getAllPosts, getPost, createPost, updatePost, deletePost};
