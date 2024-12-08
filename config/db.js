@@ -1,5 +1,4 @@
 import mongoose, { mongo } from "mongoose";
-import dotenv from "dotenv";
 
 
 const conn = async () => {

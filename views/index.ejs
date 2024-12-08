@@ -35,14 +35,30 @@
           <p class="post-meta"> Created By <a href="https://www.linkedin.com/in/azizozkrcdg"><%= posts[i].creator %></a></p>
         </div>
        <% } %>
-        <hr>
-        <!-- Pager -->
-        <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-        </div>
       </div>
     </div>
   </div>
+    
+  <!-- pager -->
+    <div class="col-lg-6 col-md-10 mx-auto">
+      <% if(pages > 0) {%>
+      <ul class="nav tm-paging-links">
+          <% for(let i=1; i <= pages; i++) { %>
+              <% if(i == current) { %>
+                  <li class="nav-item active"><a href="/?page=<%= i %>" class="nav-link tm-paging-link"><%= i %></a></li>
+              <% } else if (i < pages) { %>
+                  <li class="nav-item"><a href="/?page=<%= i %>" class="nav-link tm-paging-link"><%= i %></a></li>
+              <% } else { %>
+                  <li class="nav-item"><a href="/?page=<%= i %>" class="nav-link tm-paging-link">></a></li>
+              <% } %>
+          <% } %>
+      </ul>
+      <% } %>
+
+      
+      </div>
+    
+
 
   <hr>
 

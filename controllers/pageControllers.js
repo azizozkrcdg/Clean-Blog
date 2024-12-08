@@ -9,8 +9,8 @@ const getAddPage = (req, res) => {
 };
 
 const getEditPage = async (req, res) => {
-    const post = await Post.findById({_id : req.params.id});
-    res.render("edit", {post});
-}
+  const post = await Post.findById({ _id: req.params.id });
+  res.render("edit", { post });
+};
 
-export { getAboutPage, getAddPage, getEditPage};
+export { getAboutPage, getAddPage, getEditPage };

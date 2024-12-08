@@ -1,8 +1,21 @@
 import Post from "../models/Post.js";
 
 const getAllPosts = async (req, res) => {
-  const posts = await Post.find();
-  res.render("index", { posts: posts });
+  const page = req.query.page || 1;
+  const postPerPage = 3;
+
+  const totalPost = await Post.find().countDocuments();
+  const posts = await Post.find({})
+    .sort('dateCreated')
+    .skip((page - 1) * postPerPage)
+    .limit(postPerPage);
+  
+  
+  res.render("index.ejs", {
+    posts : posts,
+    current : page,
+    pages : Math.ceil(totalPost / postPerPage)
+  });
 };
 
 const getPost = async (req, res) => {
@@ -34,9 +47,8 @@ const deletePost = async (req, res) => {
     const post = await Post.findByIdAndDelete(req.params.id);
     res.redirect("/");
   } catch (error) {
-    console.log("Post silinemedi!!!", error)
+    console.log("Post silinemedi!!!", error);
   }
-  
 };
 
-export { getAllPosts, getPost, createPost, updatePost, deletePost};
+export { getAllPosts, getPost, createPost, updatePost, deletePost };

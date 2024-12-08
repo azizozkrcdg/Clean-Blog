@@ -4,12 +4,12 @@
   <%- include("./partials/_navigation.ejs") %>
 
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('img/post-bg.jpg')">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="post-heading">
+  <header class="masthead">
+    <div class="overlay" ></div>
+    <div class="container" >
+      <div class="row" >
+        <div class="col-lg-8 col-md-10 mx-auto" style="background-image: url('../public/img/node.jpg')">
+          <div class="post-heading" >
             <h1><Man must explore, and this is exploration at its greatest></h1>
             <h2 class="subheading"><%= post.title %></h2>
             <span class="meta">Posted by
@@ -36,10 +36,10 @@
     
       <div style="margin-top: 100px;;" class="tm-bg-gray tm-share-box">
         <div class="text-center">
-          <a style=" border-radius: 10px;" href="/posts/edit/<%= post._id %>" class="btn btn-primary p-0 mb-4 tm-btn-animate tm-btn-download tm-icon-download"><span>Update Post</span></a>	
+          <a style=" border-radius: 10px;" href="/posts/edit/<%= post._id %>" class="btn btn-outline-primary mb-3"><span>Update Post</span></a>	
         </div>	
         <div class="text-center">
-          <a href="/posts/<%= post._id %>?_method=DELETE" style=" border-radius: 10px;" onclick="return confirm('Are you sure?')" class="btn btn-danger p-0 tm-btn-animate tm-btn-download tm-icon-download"><span>Delete Post</span></a>	
+          <a href="/posts/<%= post._id %>?_method=DELETE" style=" border-radius: 10px;" onclick="return confirm('Are you sure?')" class="btn btn-outline-danger"><span>Delete Post</span></a>	
         </div>								
       </div>
     
